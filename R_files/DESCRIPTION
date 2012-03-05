@@ -1,0 +1,9 @@
+Package: solGS
+Title: solGS app
+Version: 0.1
+Date: 2012-2-14
+Author: Isaak Y Tecle <iyt2@cornell.edu>
+Maintainer: Isaak Y Tecle <iyt2@cornell.edu>
+Description: The R code behind the solGS app, Sol Genomics Network (solgenomics.net) website.
+Depends: R (>= 2.14.0), rrBLUP(>=3.5)
+License: Artistic-3
