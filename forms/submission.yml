@@ -1,0 +1,107 @@
+
+#organism form goes here...
+
+action: /gs/submit/population
+method: POST
+___
+   elements:
+           -
+           type: Text
+           name: pop_name
+           label: Name
+           size: 42
+           constraints:
+                  -Required   
+                        
+           -
+           type: Textarea 
+           name: pop_desc
+           label: Description
+           rows: 5 
+           cols: 44
+
+           -
+           type: Label
+           name: pop_is_public
+            label: Do you want to make the data public
+            value: true
+
+          -
+          type: Checkbox
+          name: pop_is_public
+          label: Yes
+          value: true
+
+         -
+         type: Checkbox
+         name: pop_is_public
+         label: No
+         value: false
+
+         -     
+         type: Hidden 
+          name: type 
+          value: pop_form
+
+         -
+         type: Submit
+          value: Submit
+
+
+
+action: /gs/submit/phenotype
+method: POST
+---
+   elements:
+           -
+           type: File
+           name: pheno_file
+           size: 40
+           constraints:
+                 -type: file
+                 -required
+                 -minimum: 1
+                     
+          -
+          type: Fidden
+          name: type
+          value: pheno_form
+
+          -
+          type: Hidden
+          name: pop_id 
+          value:
+   
+         -
+          type: Submit
+          value: Submit
+
+
+action: /gs/submit/genotype
+method: POST
+---
+   elements:
+        -
+         type: File
+         name: geno_file
+         size: 40
+         constraints:
+                 -type: file
+                 -required
+                 -minimum: 1
+
+        -
+         type: Hidden
+         name: type
+         value: geno_form
+
+        -
+         type: Hidden
+         name: pop_id 
+         value:
+
+        -
+         type: Submit
+         value: Submit
+---
+

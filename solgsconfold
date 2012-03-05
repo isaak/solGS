@@ -1,0 +1,103 @@
+project_name solGS
+name         solGS
+
+# who is the web server user for chowning and emailing.  need to set
+# these manually under Apache mod_perl for example, because the server
+# runs under a different user than when it starts.
+www_user                 __USERNAME__
+www_group                __GROUPNAME__
+
+# when true, server removes its tempfiles when the app is started
+clear_tempfiles_on_restart  1
+
+dbhost localhost
+dbname cxgn
+dbuser web_usr
+dbpass sol@ley!
+
+<DatabaseConnection sgn_test>
+        #password   set_this_please
+        dsn   dbi:Pg:host=localhost;dbname=cxgn
+        user   postgres
+        search_path   public
+        search_path   sgn
+        search_path   annotation
+        search_path   genomic
+        search_path   insitu
+        search_path   metadata
+        search_path   pheno_population
+        search_path   phenome
+        search_path   physical
+        search_path   tomato_gff
+        search_path   biosource
+        search_path   gem
+</DatabaseConnection>
+
+
+
+
+# this needs to be here rather than in the CGI controller itself to
+# work around a bug in all but the most recent
+# Catalyst::Controller::CGIBin
+<Controller::CGI>
+    cgi_dir   __path_to(cgi-bin)__
+</Controller::CGI>
+
+<View::Email::ErrorEmail>
+    <default>
+        content_type  text/plain
+        to            sgn-bugs@solgenomics.net
+        from          sgn-bugs@solgenomics.net
+        charset       utf-8
+    </default>
+    dump_skip_class   Catalyst Catalyst::Stats DBIx::Class::Schema DBIx::Class::ResultSet  DBIx::Class::Row  HTML::Mason::Interp
+</View::Email::ErrorEmail>
+
+# should we send emails, if we are a production server? this can be
+# used to turn off emails if we are being bombarded.
+feedback_email           sgn-feedback@solgenomics.net
+email                    sgn-feedback@solgenomics.net
+#disable_emails           1
+
+
+# defaults to /tmp/<user>/SGN-site
+tempfiles_base  
+        
+#allow people to log in?
+disable_login             0
+
+# where to run cluster jobs
+#web_cluster_queue	       
+
+#is this a mirror of SGN, or the real thing?
+is_mirror                 0
+
+# log files, ABSOLUTE PATHS
+error_log                 /var/log/sgn-site/error.log
+access_log                /var/log/sgn-site/access.log
+rewrite_log               /var/log/sgn-site/rewrite.log
+
+# paths to stuff
+hmmsearch_location        hmmsearch
+image_dir    	          /images/image_files
+image_path                /data/prod/public/images
+tempfiles_subdir          /static/documents/tempfiles
+submit_dir                /data/shared/submit-uploads
+documents_subdir          /documents
+conf_subdir               /conf
+
+
+#currently our cookies encrypt stuff, so this is just a random string to use to do that
+cookie_encryption_key     bo9yie2JeeVee6ouAhch9aomeesieJ3iShae8aa8
+#the shared temp directory used by cluster nodes
+cluster_shared_tempdir    /data/prod/tmp
+
+#how verbose we want the warnings to be in the apache error log
+verbose_warnings          1
+
+
+
+#path to the pucebaboon temperature sensor file:
+pucebaboon_file	       /data/prod/public/digitemp.out
+
+default_view           Mason

@@ -1,0 +1,10 @@
+User-agent: *
+Disallow: /tools/
+Disallow: /gbrowse/
+Disallow: /documents/tempfiles/
+Disallow: /cview/
+Disallow: /phenome/qtl_analysis.pl
+Disallow: /phenome/qtl.pl
+Disallow: /phenome/population.pl
+Disallow: /qtl/download/
+Crawl-delay: 30
